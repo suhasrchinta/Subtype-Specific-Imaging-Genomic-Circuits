@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subtype-Specific Imaging-to-Gene Circuits in Breast Cancer</title>
+<meta name="description" content="An interactive walkthrough of how longitudinal DCE-MRI features trace to subtype-specific gene pathways predicting chemotherapy response in breast cancer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <span class="brand">imaging<span class="brand-accent">→</span>gene circuits</span>
+    <div class="topnav-links">
+      <a href="#circuits">Circuits</a>
+      <a href="#comparison">vs. MammaPrint</a>
+      <a href="#methods">Methods</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">I-SPY2 / ACRIN-6698 &middot; n = 384 &middot; three molecular subtypes</p>
+    <h1>Does the imaging signal that predicts chemotherapy response<br>trace to the biology driving that response?</h1>
+    <p class="hero-sub">
+      Breast cancer subtypes respond to neoadjuvant chemotherapy through different biology &mdash;
+      estrogen signaling, HER2 amplification, immune and vascular programs. This walkthrough follows
+      three real patients' longitudinal MRI scans through the statistical pipeline that links their
+      imaging features to subtype-specific gene pathways.
+    </p>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-value">0.796</span>
+        <span class="stat-label">Pooled AUC, DCE-MRI</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">+0.179</span>
+        <span class="stat-label">AUC advantage over MammaPrint</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">3</span>
+        <span class="stat-label">Subtype-specific circuits identified</span>
+      </div>
+    </div>
+    <a class="scroll-cue" href="#circuits">Follow a patient's scan through the pipeline &darr;</a>
+  </div>
+</header>
+
+<main>
+
+  <section id="circuits" class="circuits-section">
+    <div class="section-head">
+      <p class="eyebrow">Three subtypes, three circuits</p>
+      <h2>Each subtype's imaging signal points to different biology</h2>
+      <p class="section-sub">
+        Select a subtype to follow one real patient's scan &mdash; from the raw signal-enhancement map,
+        through the gene it correlates with, to the pathway that gene sits in.
+      </p>
+    </div>
+
+    <div class="circuit-tabs" role="tablist">
+      <button class="circuit-tab active" data-circuit="hr_her2neg" role="tab" aria-selected="true">
+        <span class="tab-index">01</span>
+        <span class="tab-label">HR+/HER2&minus;</span>
+        <span class="tab-sub">FTV &rarr; SCUBE2 &rarr; Estrogen Response</span>
+      </button>
+      <button class="circuit-tab" data-circuit="her2pos" role="tab" aria-selected="false">
+        <span class="tab-index">02</span>
+        <span class="tab-label">HER2+</span>
+        <span class="tab-sub">LD &rarr; ERBB2/GRB7 &rarr; Hedgehog</span>
+      </button>
+      <button class="circuit-tab" data-circuit="tnbc" role="tab" aria-selected="false">
+        <span class="tab-index">03</span>
+        <span class="tab-label">Triple-Negative</span>
+        <span class="tab-sub">BPE &rarr; FLT1/ANGPT2 &rarr; IFN-alpha</span>
+      </button>
+    </div>
+
+    <div class="circuit-panel" id="panel-root">
+      <!-- populated by js/main.js -->
+    </div>
+  </section>
+
+  <section id="comparison" class="comparison-section">
+    <div class="section-head">
+      <p class="eyebrow">Clinical benchmark</p>
+      <h2>A routine MRI sequence vs. an FDA-cleared genomic assay</h2>
+      <p class="section-sub">
+        MammaPrint was validated for recurrence-risk stratification, not neoadjuvant pCR prediction &mdash;
+        this comparison reflects that mismatch as much as it reflects a genuine imaging advantage.
+        Toggle subtypes to see where the gap is largest.
+      </p>
+    </div>
+    <div class="comparison-panel">
+      <div class="comparison-chart-wrap">
+        <svg id="auc-chart" viewBox="0 0 640 360" preserveAspectRatio="xMidYMid meet"></svg>
+      </div>
+      <div class="comparison-toggles" id="auc-toggles"></div>
+    </div>
+  </section>
+
+  <section id="methods" class="methods-section">
+    <div class="section-head">
+      <p class="eyebrow">How to read this</p>
+      <h2>What this page shows &mdash; and doesn't</h2>
+    </div>
+    <div class="methods-grid">
+      <div class="methods-card">
+        <h3>Real data, real patients</h3>
+        <p>Every scan, gene-correlation point, and AUC value on this page comes directly from the
+        I-SPY2/ACRIN-6698 cohort (n=384) and its linked GSE194040 gene expression data (n=988).
+        Nothing here is simulated.</p>
+      </div>
+      <div class="methods-card">
+        <h3>Mediation, not causation</h3>
+        <p>The paper's circuits are established via formal bootstrapped mediation analysis, not
+        simple correlation. Some relationships shown here (like SCUBE2's) are directionally
+        consistent but statistically weaker than the strongest circuit (ERBB2) &mdash; that
+        nuance is preserved rather than smoothed over.</p>
+      </div>
+      <div class="methods-card">
+        <h3>TNBC's circuit is different in kind</h3>
+        <p>FLT1 and ANGPT2 are vascular/microenvironment genes, not tumor-intrinsic like SCUBE2 or
+        ERBB2. Background parenchymal enhancement (BPE) shows no significant genome-wide gene
+        correlation on its own &mdash; the TNBC circuit is established at the pathway level (GSEA),
+        which this page's scatter plot honestly reflects as a weak direct relationship.</p>
+      </div>
+      <div class="methods-card">
+        <h3>Preliminary findings</h3>
+        <p>HR+/HER2&minus; results are based on only 24 pCR-positive cases and are reported as
+        preliminary throughout the source study. This page carries that same caveat forward.</p>
+      </div>
+    </div>
+    <p class="methods-footer">
+      Built as a companion demo to a Regeneron Science Talent Search research submission.
+      Source data: I-SPY2/ACRIN-6698 (TCIA), GSE194040. Not a clinical tool.
+    </p>
+  </section>
+
+</main>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
