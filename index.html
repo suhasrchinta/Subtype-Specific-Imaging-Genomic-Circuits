@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subtype-Specific Imaging-to-Gene Circuits in Breast Cancer</title>
+<meta name="description" content="A guided walkthrough of how longitudinal DCE-MRI features trace to subtype-specific gene pathways predicting chemotherapy response in breast cancer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Serif:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="doc-frame">
+
+  <nav class="topnav">
+    <div class="topnav-inner">
+      <span class="brand">CIRCUIT-REPORT <span class="brand-code">/ ISPY2-ACRIN6698</span></span>
+      <p class="nav-question">Does the imaging signal predicting response trace to the biology driving it?</p>
+      <div class="topnav-links">
+        <a href="#hr">01 HR+/HER2-</a>
+        <a href="#her2">02 HER2+</a>
+        <a href="#tnbc">03 TNBC</a>
+        <a href="#comparison">Benchmark</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="form-tag">FORM 01 &middot; STUDY OVERVIEW</p>
+      <h1>Does the imaging signal that predicts chemotherapy response<br>trace to the biology driving that response?</h1>
+      <p class="hero-sub">
+        Breast cancer subtypes respond to neoadjuvant chemotherapy through different biology:
+        estrogen signaling, HER2 amplification, immune and vascular programs. Scroll to follow
+        three real patients' longitudinal MRI scans through the statistical pipeline that links
+        their imaging features to subtype-specific gene pathways.
+      </p>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-value">0.796</span>
+          <span class="stat-label">Pooled AUC, DCE-MRI</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">+0.179</span>
+          <span class="stat-label">AUC advantage over MammaPrint</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">n=384</span>
+          <span class="stat-label">I-SPY2/ACRIN-6698 cohort</span>
+        </div>
+      </div>
+      <a class="scroll-cue" href="#hr">Begin the walkthrough &darr;</a>
+    </div>
+  </header>
+
+  <!-- ===================== HR+/HER2- ===================== -->
+  <section id="hr" class="scrolly-section" data-circuit="hr_her2neg">
+    <div class="scrolly-intro">
+      <p class="form-tag">CIRCUIT 01 OF 03</p>
+      <h2>HR+/HER2-: the estrogen-suppression circuit</h2>
+      <p class="scrolly-intro-sub">Patient 331192. 24 pCR cases in this subtype across the cohort; treat this circuit's findings as preliminary.</p>
+    </div>
+    <div class="scrolly-grid">
+      <div class="scrolly-stage-col">
+        <div class="scrolly-stage" data-stage="hr_her2neg"></div>
+      </div>
+      <div class="scrolly-steps-col">
+        <div class="scrolly-step" data-circuit="hr_her2neg" data-step="0">
+          <span class="step-num">01</span>
+          <h3>The scan, timepoint by timepoint</h3>
+          <p>This is a real signal-enhancement map (SER) from patient 331192's DCE-MRI, with the
+          tumor segmentation outlined in red. Four scans were taken across neoadjuvant treatment:
+          baseline (T0), then three follow-ups (T1-T3).</p>
+        </div>
+        <div class="scrolly-step" data-circuit="hr_her2neg" data-step="1">
+          <span class="step-num">02</span>
+          <h3>The tumor signal collapses</h3>
+          <p>The enhancing tumor region shrinks from 1,049 signal-positive pixels at baseline to
+          just 55 by T3, a decline mirrored in this patient's tabular functional tumor volume
+          (FTV): 58.6 to 0.21. This is what a complete responder's scan looks like.</p>
+        </div>
+        <div class="scrolly-step" data-circuit="hr_her2neg" data-step="2">
+          <span class="step-num">03</span>
+          <h3>That decline correlates with a gene</h3>
+          <p>Across 161 HR+/HER2- patients, early FTV change correlates with expression of
+          <strong>SCUBE2</strong>, a gene with an established role in hormone-responsive luminal
+          epithelial biology. Each dot below is one real patient.</p>
+        </div>
+        <div class="scrolly-step" data-circuit="hr_her2neg" data-step="3">
+          <span class="step-num">04</span>
+          <h3>SCUBE2 sits inside a suppressed pathway</h3>
+          <p>Gene set enrichment analysis places SCUBE2 within the Estrogen Response pathway,
+          which is suppressed in patients who respond (NES = -2.821). Imaging feature, gene, and
+          pathway now form a complete circuit.</p>
+        </div>
+        <div class="scrolly-step" data-circuit="hr_her2neg" data-step="4">
+          <span class="step-num">05</span>
+          <h3>Is this statistically real, or a coincidence?</h3>
+          <p>Formal bootstrapped mediation testing was used to check whether SCUBE2 statistically
+          explains part of the imaging-outcome relationship, not just correlates with it. The
+          result is directionally consistent but weaker than the circuit below.</p>
+        </div>
+        <div class="scrolly-step" data-circuit="hr_her2neg" data-step="5">
+          <span class="step-num">06</span>
+          <h3>Does it hold up outside this dataset?</h3>
+          <p>SCUBE2's gene-outcome relationship was tested for replication in three independent
+          external cohorts, on entirely different patients than the discovery data above.</p>
+        </div>
+        <div class="scrolly-step" data-circuit="hr_her2neg" data-step="6">
+          <span class="step-num">07</span>
+          <h3>How does a scan become a number?</h3>
+          <p>Before any of this, the raw scan is reduced to a single quantitative feature: this
+          patient's early functional tumor volume (FTV) change, extracted directly from the
+          segmented signal-enhancement map.</p>
+        </div>
+        <div class="scrolly-step" data-circuit="hr_her2neg" data-step="7">
+          <span class="step-num">08</span>
+          <h3>How does the model turn that into a prediction?</h3>
+          <p>That feature, alongside 27 others describing tumor volume, shape, and enhancement
+          over time, feeds a Random Forest of 500 decision trees. Each tree votes; the majority
+          vote produces this subtype's AUC of 0.699.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== HER2+ ===================== -->
+  <section id="her2" class="scrolly-section" data-circuit="her2pos">
+    <div class="scrolly-intro">
+      <p class="form-tag">CIRCUIT 02 OF 03</p>
+      <h2>HER2+: the Hedgehog-suppression circuit</h2>
+      <p class="scrolly-intro-sub">Patient 474874. The strongest single mediation result in the study.</p>
+    </div>
+    <div class="scrolly-grid">
+      <div class="scrolly-stage-col">
+        <div class="scrolly-stage" data-stage="her2pos"></div>
+      </div>
+      <div class="scrolly-steps-col">
+        <div class="scrolly-step" data-circuit="her2pos" data-step="0">
+          <span class="step-num">01</span>
+          <h3>A different subtype, a different pattern</h3>
+          <p>Patient 474874's real SER scan across four timepoints. In HER2+ disease, the imaging
+          feature that matters most is the tumor's longest diameter (LD) and its early volume
+          change, not FTV alone.</p>
+        </div>
+        <div class="scrolly-step" data-circuit="her2pos" data-step="1">
+          <span class="step-num">02</span>
+          <h3>A gradual, real regression</h3>
+          <p>Signal-positive pixels decline from 4,712 at baseline to 227 by T3, tracking this
+          patient's tabular longest-diameter decline from 7.6mm to fully resolved.</p>
+        </div>
+        <div class="scrolly-step" data-circuit="her2pos" data-step="2">
+          <span class="step-num">03</span>
+          <h3>The strongest gene relationship in this study</h3>
+          <p>Across 90 HER2+ patients, early FTV change correlates with <strong>ERBB2</strong> and
+          its co-amplified neighbor <strong>GRB7</strong>. Both sit at the same 17q12 locus that
+          defines HER2-positive disease.</p>
+        </div>
+        <div class="scrolly-step" data-circuit="her2pos" data-step="3">
+          <span class="step-num">04</span>
+          <h3>Suppressing Hedgehog, activating interferon</h3>
+          <p>ERBB2/GRB7 sit within a suppressed Hedgehog signaling pathway (NES = -2.031),
+          alongside activation of interferon-alpha and interferon-gamma response signatures,
+          a pattern distinct from the estrogen-driven HR+/HER2- circuit.</p>
+        </div>
+        <div class="scrolly-step" data-circuit="her2pos" data-step="4">
+          <span class="step-num">05</span>
+          <h3>The strongest mediation result in the study</h3>
+          <p>ERBB2 is the only circuit gene significant under both two-sided and pre-specified
+          one-sided mediation tests: an estimated 23.1% of the imaging-outcome association is
+          statistically explained by ERBB2 expression.</p>
+        </div>
+        <div class="scrolly-step" data-circuit="her2pos" data-step="5">
+          <span class="step-num">06</span>
+          <h3>A more complicated replication story</h3>
+          <p>ERBB2 was not individually significant in any single external cohort, but was
+          directionally consistent in all three. Combined-evidence testing recovers the signal,
+          a case for looking across cohorts, not just within one.</p>
+        </div>
+        <div class="scrolly-step" data-circuit="her2pos" data-step="6">
+          <span class="step-num">07</span>
+          <h3>How does a scan become a number?</h3>
+          <p>This patient's longest-diameter decline (7.6mm to fully resolved) is extracted
+          directly from the segmented scan as a single quantitative feature before any modeling
+          happens.</p>
+        </div>
+        <div class="scrolly-step" data-circuit="her2pos" data-step="7">
+          <span class="step-num">08</span>
+          <h3>How does the model turn that into a prediction?</h3>
+          <p>That feature joins the same 28-feature panel used across all subtypes, feeding a
+          Random Forest of 500 trees. For HER2+ disease, the majority vote produces an AUC of
+          0.754.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TNBC ===================== -->
+  <section id="tnbc" class="scrolly-section" data-circuit="tnbc">
+    <div class="scrolly-intro">
+      <p class="form-tag">CIRCUIT 03 OF 03</p>
+      <h2>Triple-negative: the vascular / interferon circuit</h2>
+      <p class="scrolly-intro-sub">Patient 221686. A structurally different kind of evidence than the first two circuits.</p>
+    </div>
+    <div class="scrolly-grid">
+      <div class="scrolly-stage-col">
+        <div class="scrolly-stage" data-stage="tnbc"></div>
+      </div>
+      <div class="scrolly-steps-col">
+        <div class="scrolly-step" data-circuit="tnbc" data-step="0">
+          <span class="step-num">01</span>
+          <h3>A vascular signal, not a tumor signal</h3>
+          <p>Patient 221686's real SER scan. In TNBC, the dominant imaging feature is background
+          parenchymal enhancement (BPE), signal in the normal tissue around the tumor, reflecting
+          vascular and hormonal activity rather than the tumor itself.</p>
+        </div>
+        <div class="scrolly-step" data-circuit="tnbc" data-step="1">
+          <span class="step-num">02</span>
+          <h3>A strong, real decline</h3>
+          <p>Signal-positive pixels fall from 2,793 at baseline to 160 by T3, tracking this
+          patient's BPE decline of roughly 67 percent over treatment.</p>
+        </div>
+        <div class="scrolly-step" data-circuit="tnbc" data-step="2">
+          <span class="step-num">03</span>
+          <h3>An honest, weak scatter, and that is the point</h3>
+          <p>Across 131 TNBC patients, BPE shows only a near-zero direct correlation with
+          <strong>FLT1</strong>. That is not a bug in this demo. The source paper explicitly
+          reports that BPE carries zero genome-wide significant gene associations at the strict
+          Level 2 test, direct evidence that this imaging feature is vascular, not
+          tumor-transcriptomic.</p>
+        </div>
+        <div class="scrolly-step" data-circuit="tnbc" data-step="3">
+          <span class="step-num">04</span>
+          <h3>The circuit exists at the pathway level instead</h3>
+          <p>FLT1 and ANGPT2 sit within an activated interferon-alpha pathway (NES = +4.265),
+          established through targeted gene-set testing, not a raw scatter relationship. FLT1 and
+          ANGPT2 are vascular endothelial genes, not tumor-intrinsic like SCUBE2 or ERBB2.</p>
+        </div>
+        <div class="scrolly-step" data-circuit="tnbc" data-step="4">
+          <span class="step-num">05</span>
+          <h3>Underpowered, not disproven</h3>
+          <p>FLT1's mediation test used only 27 patients, the IVIM imaging subset, giving roughly
+          10 percent statistical power. The result is reported honestly as underpowered rather
+          than as a null finding.</p>
+        </div>
+        <div class="scrolly-step" data-circuit="tnbc" data-step="5">
+          <span class="step-num">06</span>
+          <h3>A real signal and a clean null, side by side</h3>
+          <p>FLT1 replicated in 1 of 3 external cohorts. ANGPT2, its shared-pathway neighbor,
+          showed a clean null across all three, sharpening rather than muddying the picture.</p>
+        </div>
+        <div class="scrolly-step" data-circuit="tnbc" data-step="6">
+          <span class="step-num">07</span>
+          <h3>How does a scan become a number?</h3>
+          <p>This patient's background parenchymal enhancement decline (about 67 percent over
+          treatment) is extracted directly from the scan as a single quantitative feature.</p>
+        </div>
+        <div class="scrolly-step" data-circuit="tnbc" data-step="7">
+          <span class="step-num">08</span>
+          <h3>How does the model turn that into a prediction?</h3>
+          <p>That feature joins the same 28-feature panel, feeding a Random Forest of 500 trees.
+          For TNBC, the majority vote produces the strongest subtype AUC in the study: 0.787.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== Comparison ===================== -->
+  <section id="comparison" class="comparison-section">
+    <div class="form-header">
+      <p class="form-tag">FORM 04 &middot; CLINICAL BENCHMARK</p>
+      <h2>A routine MRI sequence vs. an FDA-cleared genomic assay</h2>
+      <p class="section-sub">
+        MammaPrint was validated for recurrence-risk stratification, not neoadjuvant pCR
+        prediction. This comparison reflects that mismatch as much as it reflects a genuine
+        imaging advantage. Toggle subtypes to see where the gap is largest.
+      </p>
+    </div>
+    <div class="comparison-panel">
+      <div class="comparison-chart-wrap">
+        <svg id="auc-chart" viewBox="0 0 640 360" preserveAspectRatio="xMidYMid meet"></svg>
+      </div>
+      <div class="comparison-toggles" id="auc-toggles"></div>
+    </div>
+  </section>
+
+  <!-- ===================== Methods ===================== -->
+  <section id="methods" class="methods-section">
+    <div class="form-header">
+      <p class="form-tag">APPENDIX &middot; HOW TO READ THIS</p>
+      <h2>What this page shows, and doesn't</h2>
+    </div>
+    <div class="methods-grid">
+      <div class="methods-card">
+        <h3>Real data, real patients</h3>
+        <p>Every scan, gene-correlation point, and AUC value on this page comes directly from
+        the I-SPY2/ACRIN-6698 cohort (n=384) and its linked GSE194040 gene expression data
+        (n=988). Nothing here is simulated.</p>
+      </div>
+      <div class="methods-card">
+        <h3>Mediation, not causation</h3>
+        <p>The paper's circuits are established via formal bootstrapped mediation analysis, not
+        simple correlation. Some relationships shown here are directionally consistent but
+        statistically weaker than the strongest circuit (ERBB2). That nuance is preserved rather
+        than smoothed over.</p>
+      </div>
+      <div class="methods-card">
+        <h3>TNBC's circuit is different in kind</h3>
+        <p>FLT1 and ANGPT2 are vascular/microenvironment genes, not tumor-intrinsic like SCUBE2
+        or ERBB2. Background parenchymal enhancement shows no significant genome-wide gene
+        correlation on its own. The TNBC circuit is established at the pathway level.</p>
+      </div>
+      <div class="methods-card">
+        <h3>Preliminary findings</h3>
+        <p>HR+/HER2- results are based on only 24 pCR-positive cases and are reported as
+        preliminary throughout the source study. This page carries that same caveat forward.</p>
+      </div>
+    </div>
+    <p class="methods-footer">
+      Built as a companion demo to a Regeneron Science Talent Search research submission.
+      Source data: I-SPY2/ACRIN-6698 (TCIA), GSE194040. Not a clinical tool.
+    </p>
+  </section>
+
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
